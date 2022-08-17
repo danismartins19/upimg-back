@@ -1,4 +1,4 @@
-import express, { Request, Response, ErrorRequestHandler } from 'express';
+import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -12,7 +12,8 @@ const server = express()
 server.use(cors())
 
 server.use(express.static(path.join(__dirname, '../public')));
-server.use(express.urlencoded({ extended: true }));
+server.use(express.json({limit: '25mb'}))
+server.use(express.urlencoded({ extended: true , limit: '25mb'}));
 
 server.use(homeRoutes)
 server.use('/view', viewRoutes)
